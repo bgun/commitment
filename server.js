@@ -10,7 +10,7 @@ var port = process.env.port || 9005;
 var app = express();
 app.use('/public', express.static(__dirname + "/public"));
 
-var usernames = process.env.GITHUB_USERS.split(',');
+var usernames = (process.env.GITHUB_USERNAMES || []).split(',');
 
 // replacement values
 var tokens = {
