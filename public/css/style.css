@@ -27,7 +27,9 @@ h1 {
   padding-bottom: 1rem;
 }
 .user a {
+  color: #59F;
   display: block;
+  margin-right: 2rem;
   min-height: 10rem;
   padding: 1rem 1rem 1rem 12rem;
   position: relative;
@@ -35,19 +37,26 @@ h1 {
 }
 .user a:hover {
   background: #EEE;
+  border-radius: 0 1rem 1rem 0;
 }
 .user .name {
   font-weight: 300;
 }
 .user .username {
-  background: #48F;
+  background: #59F;
+  background-image: url('/public/images/github_64_black.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: auto 100%;
   border-radius: 2rem;
   color: #FFF;
   font-size: 1.5rem;
-  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem 0.5rem 3rem
 }
 .user .timeago {
   color: #999;
+  font-size: 1.6rem;
   font-style: italic;
 }
 .user img.avatar {

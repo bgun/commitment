@@ -8,6 +8,7 @@ var moment = require('moment');
 
 // stuff that shouldn't be in repo. Replace with your values
 var settings = require('./_settings.js');
+var test_data = require('./test_data.js');
 
 var app = express();
 app.use('/public', express.static(__dirname + "/public"));
@@ -88,67 +89,8 @@ var getLastUpdatedRepoForUser = function(username) {
   return deferred.promise;
 };
 
-app.get('/', function(req, res) {
-  res.sendFile(__dirname+'/public/html/index.html');
-});
-
-app.get('/data', function(req, res) {
-  // test data
-  /*
-  var users = [
-    {
-      username: "Jvvlives2005",
-      pushed_at: "2015-02-28T20:53:24Z",
-      last_pushed: "Yesterday at 3:53 PM",
-      avatar: "https://avatars.githubusercontent.com/u/11141437?v=3",
-      name: "Joshelyn Vivas",
-      home_url: "https://github.com/theaulait"
-    },
-    {
-      username: "ReinardCox",
-      pushed_at: "2015-02-28T20:52:20Z",
-      last_pushed: "Yesterday at 3:52 PM",
-      avatar: "https://avatars.githubusercontent.com/u/11142904?v=3",
-      name: "Reinard Cox",
-      home_url: "https://github.com/theaulait"
-    },
-    {
-      username: "jorgereina1986",
-      pushed_at: "2015-02-28T20:52:20Z",
-      last_pushed: "Yesterday at 3:52 PM",
-      avatar: "https://avatars.githubusercontent.com/u/11138952?v=3",
-      home_url: "https://github.com/theaulait"
-    },
-    {
-      username: "Jvvlives2005",
-      pushed_at: "2015-02-28T20:53:24Z",
-      last_pushed: "Yesterday at 3:53 PM",
-      avatar: "https://avatars.githubusercontent.com/u/11141437?v=3",
-      name: "Joshelyn Vivas",
-      home_url: "https://github.com/theaulait"
-    },
-    {
-      username: "ReinardCox",
-      pushed_at: "2015-02-28T20:52:20Z",
-      last_pushed: "Yesterday at 3:52 PM",
-      avatar: "https://avatars.githubusercontent.com/u/11142904?v=3",
-      name: "Reinard Cox",
-      home_url: "https://github.com/theaulait"
-    },
-    {
-      username: "jorgereina1986",
-      pushed_at: "2015-02-28T20:52:20Z",
-      last_pushed: "Yesterday at 3:52 PM",
-      avatar: "https://avatars.githubusercontent.com/u/11138952?v=3",
-      home_url: "https://github.com/theaulait"
-    }
-  ];
-  console.log("Sending %d test items", users.length); 
-  res.send({
-    updated: new Date().getTime(),
-    users: users
-  });
-  */
+var getLiveData = function() {
+  var deferred = Q.defer();
   var user_promises = _.map(usernames, function(n) {
     return getUser(n);
   });
@@ -162,7 +104,7 @@ app.get('/data', function(req, res) {
       Q.all(repo_promises)
         .then(function(repos) {
 
-          var data = _(repos)
+          var output = _(repos)
             .map(function(r, i) {
               return _.extend({
                 username: usernames[i],
@@ -175,15 +117,44 @@ app.get('/data', function(req, res) {
               });
             })
             .sortBy('pushed_at')
-            .reverse();
+            .reverse()
+            .value();
 
-          res.send({
+          console.log("Returning live data, "+output.length+" users");
+          deferred.resolve({
             updated: new Date().getTime(),
-            users: data
+            users: output
           });
 
         })
         .done();
+    })
+    .done();
+
+  return deferred.promise;
+};
+
+var getTestData = function() {
+  var deferred = Q.defer();
+  console.log("Returning test data");
+  deferred.resolve({
+    test: true,
+    updated: 0,
+    users: test_data.users
+  });
+  return deferred.promise;
+};
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname+'/public/html/index.html');
+});
+
+app.get('/data', function(req, res) {
+  console.log(req.query);
+  var promise = req.query.test ? getTestData() : getLiveData();
+  promise
+    .then(function(data) {
+      res.send(data);
     })
     .done();
 });
