@@ -57,3 +57,11 @@ h1 {
     top: 0;
   width: 10rem;
 }
+
+footer {
+  background: #DDD;
+  color: #333;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  padding: 3rem 2rem 8rem 2rem;
+}

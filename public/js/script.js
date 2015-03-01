@@ -48,7 +48,7 @@ var User = React.createClass({
         <a href={this.props.user.home_url}>
           <img className="avatar" src={this.props.user.avatar} />
           <div className="name"   >{this.props.user.name} <span className="username">{this.props.user.username}</span></div>
-          <div className="timeago">{this.props.user.last_pushed}</div>
+          <div className="timeago">Last push: {this.props.user.last_pushed}</div>
         </a>
       </li>
     );

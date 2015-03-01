@@ -26,7 +26,7 @@ var formatString = function(str, tokens) {
   _.each(tokens, function(v, k) {
     str = str.replace('{{'+k+'}}', v);
   });
-  console.log("Formatted",str);
+  //console.log("Formatted",str);
   return str;
 };
 
@@ -94,6 +94,7 @@ app.get('/', function(req, res) {
 
 app.get('/data', function(req, res) {
   // test data
+  /*
   var users = [
     {
       username: "Jvvlives2005",
@@ -147,7 +148,7 @@ app.get('/data', function(req, res) {
     updated: new Date().getTime(),
     users: users
   });
-  /*
+  */
   var user_promises = _.map(usernames, function(n) {
     return getUser(n);
   });
@@ -169,7 +170,7 @@ app.get('/data', function(req, res) {
                 last_pushed : r.pushed_at ? moment(r.pushed_at).calendar() : 'Never'
               }, {
                 avatar   : users[i].avatar_url,
-                name     : users[i].name,
+                name     : users[i].name || 'unknown',
                 home_url : users[i].html_url
               });
             })
@@ -185,7 +186,6 @@ app.get('/data', function(req, res) {
         .done();
     })
     .done();
-    */
 });
 
 app.listen(9005);
