@@ -4,7 +4,8 @@
   "description": "API to track and analyze GitHub commits for a group of users",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test" : "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
