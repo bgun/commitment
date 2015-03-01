@@ -7,20 +7,16 @@ var _ = require('lodash');
 var moment = require('moment');
 var port = process.env.port || 9005;
 
-// stuff that shouldn't be in repo. Replace with your values
-var config = require('./config.js');
-var test_data = require('./test_data.js');
-
 var app = express();
 app.use('/public', express.static(__dirname + "/public"));
 
-var usernames = config.users; // array of usernames to check
+var usernames = process.env.GITHUB_USERS.split(',');
 
 // replacement values
 var tokens = {
   gh_base      : 'https://api.github.com/',
-  client_id    : config.CLIENT_ID,
-  client_secret: config.CLIENT_SECRET
+  client_id    : process.env.GITHUB_CLIENT_ID,
+  client_secret: process.env.GITHUB_CLIENT_SECRET
 };
 
 // super simple string formatter
