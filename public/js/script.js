@@ -16,17 +16,20 @@ var UserList = React.createClass({
     if(cached_data && (cached_data.updated+(delay_seconds*1000) > time)) {
       time_left = Math.round(delay_seconds - ((time-cached_data.updated)/1000));
       msg = "Showing recently cached data. " + time_left + " seconds till delay expires";
+      mixpanel.track("Showing cached data");
       this.setState({
         message: msg,
         data: cached_data.users
       });
     } else {
       console.log("No recently cached data found. Loading...");
+      mixpanel.track("Loading fresh data");
       $.ajax({
         url: this.props.url,
         dataType: 'json',
         success: function(data) {
           localStorage.setItem('users', JSON.stringify(data));
+          mixpanel.track("Loaded data successfully");
           this.setState({
             message: "Fetching new data",
             data: data.users
@@ -34,6 +37,7 @@ var UserList = React.createClass({
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
+          mixpanel.track("Error loading data");
         }.bind(this)
       });
     }
