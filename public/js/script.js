@@ -24,10 +24,12 @@ var UserList = React.createClass({
     } else {
       console.log("No recently cached data found. Loading...");
       mixpanel.track("Loading fresh data");
+      $('#container').addClass('loading');
       $.ajax({
         url: this.props.url,
         dataType: 'json',
         success: function(data) {
+          $('#container').removeClass('loading');
           localStorage.setItem('users', JSON.stringify(data));
           mixpanel.track("Loaded data successfully");
           this.setState({

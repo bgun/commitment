@@ -12,6 +12,14 @@ html, body {
   margin: 0 auto;
   max-width: 640px;
 }
+#container {
+  min-height: 20rem;
+}
+#container.loading {
+  background-image: url('/public/images/loading.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+}
 h1 {
   font-size: 4rem;
   font-weight: 100;
