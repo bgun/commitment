@@ -4,13 +4,15 @@ var express = require('express');
 var request = require('request');
 var Q = require('q');
 var _ = require('lodash');
-var moment = require('moment');
+var moment = require('moment-timezone');
 var port = process.env.PORT || 9005;
+
+moment().tz("America/New_York").format();
 
 var app = express();
 app.use('/public', express.static(__dirname + "/public"));
 
-var usernames = (process.env.GITHUB_USERNAMES || []).split(',');
+var usernames = (process.env.GITHUB_USERNAMES || '').split(',');
 
 // replacement values
 var tokens = {
