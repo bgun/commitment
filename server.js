@@ -5,21 +5,22 @@ var request = require('request');
 var Q = require('q');
 var _ = require('lodash');
 var moment = require('moment');
+var port = process.env.port || 9005;
 
 // stuff that shouldn't be in repo. Replace with your values
-var settings = require('./_settings.js');
+var config = require('./config.js');
 var test_data = require('./test_data.js');
 
 var app = express();
 app.use('/public', express.static(__dirname + "/public"));
 
-var usernames = settings.users; // array of usernames to check
+var usernames = config.users; // array of usernames to check
 
 // replacement values
 var tokens = {
   gh_base      : 'https://api.github.com/',
-  client_id    : settings.CLIENT_ID,
-  client_secret: settings.CLIENT_SECRET
+  client_id    : config.CLIENT_ID,
+  client_secret: config.CLIENT_SECRET
 };
 
 // super simple string formatter
@@ -159,4 +160,5 @@ app.get('/data', function(req, res) {
     .done();
 });
 
-app.listen(9005);
+console.log("Starting server on port "+port);
+app.listen(port);
