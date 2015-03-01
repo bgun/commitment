@@ -5,7 +5,7 @@ var request = require('request');
 var Q = require('q');
 var _ = require('lodash');
 var moment = require('moment');
-var port = process.env.port || 9005;
+var port = process.env.PORT || 9005;
 
 var app = express();
 app.use('/public', express.static(__dirname + "/public"));
