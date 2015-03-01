@@ -26,6 +26,7 @@ var formatString = function(str, tokens) {
   _.each(tokens, function(v, k) {
     str = str.replace('{{'+k+'}}', v);
   });
+  console.log("Formatted",str);
   return str;
 };
 
@@ -92,6 +93,61 @@ app.get('/', function(req, res) {
 });
 
 app.get('/data', function(req, res) {
+  // test data
+  var users = [
+    {
+      username: "Jvvlives2005",
+      pushed_at: "2015-02-28T20:53:24Z",
+      last_pushed: "Yesterday at 3:53 PM",
+      avatar: "https://avatars.githubusercontent.com/u/11141437?v=3",
+      name: "Joshelyn Vivas",
+      home_url: "https://github.com/theaulait"
+    },
+    {
+      username: "ReinardCox",
+      pushed_at: "2015-02-28T20:52:20Z",
+      last_pushed: "Yesterday at 3:52 PM",
+      avatar: "https://avatars.githubusercontent.com/u/11142904?v=3",
+      name: "Reinard Cox",
+      home_url: "https://github.com/theaulait"
+    },
+    {
+      username: "jorgereina1986",
+      pushed_at: "2015-02-28T20:52:20Z",
+      last_pushed: "Yesterday at 3:52 PM",
+      avatar: "https://avatars.githubusercontent.com/u/11138952?v=3",
+      home_url: "https://github.com/theaulait"
+    },
+    {
+      username: "Jvvlives2005",
+      pushed_at: "2015-02-28T20:53:24Z",
+      last_pushed: "Yesterday at 3:53 PM",
+      avatar: "https://avatars.githubusercontent.com/u/11141437?v=3",
+      name: "Joshelyn Vivas",
+      home_url: "https://github.com/theaulait"
+    },
+    {
+      username: "ReinardCox",
+      pushed_at: "2015-02-28T20:52:20Z",
+      last_pushed: "Yesterday at 3:52 PM",
+      avatar: "https://avatars.githubusercontent.com/u/11142904?v=3",
+      name: "Reinard Cox",
+      home_url: "https://github.com/theaulait"
+    },
+    {
+      username: "jorgereina1986",
+      pushed_at: "2015-02-28T20:52:20Z",
+      last_pushed: "Yesterday at 3:52 PM",
+      avatar: "https://avatars.githubusercontent.com/u/11138952?v=3",
+      home_url: "https://github.com/theaulait"
+    }
+  ];
+  console.log("Sending %d test items", users.length); 
+  res.send({
+    updated: new Date().getTime(),
+    users: users
+  });
+  /*
   var user_promises = _.map(usernames, function(n) {
     return getUser(n);
   });
@@ -112,19 +168,24 @@ app.get('/data', function(req, res) {
                 pushed_at   : r.pushed_at ? r.pushed_at : '',
                 last_pushed : r.pushed_at ? moment(r.pushed_at).calendar() : 'Never'
               }, {
-                avatar : users[i].avatar_url,
-                name   : users[i].name
+                avatar   : users[i].avatar_url,
+                name     : users[i].name,
+                home_url : users[i].html_url
               });
             })
             .sortBy('pushed_at')
             .reverse();
 
-          res.send(data);
+          res.send({
+            updated: new Date().getTime(),
+            users: data
+          });
 
         })
         .done();
     })
     .done();
+    */
 });
 
 app.listen(9005);

@@ -1,7 +1,59 @@
 html, body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 300;
   margin: 0;
   padding: 0;
 }
 * {
   box-sizing: border-box;
+}
+#layout {
+  margin: 0 auto;
+  max-width: 640px;
+}
+h1 {
+  font-size: 4rem;
+  font-weight: 100;
+}
+.user-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.user {
+  font-size: 2rem;
+  line-height: 3rem;
+  padding-bottom: 1rem;
+}
+.user a {
+  display: block;
+  min-height: 10rem;
+  padding: 1rem 1rem 1rem 12rem;
+  position: relative;
+  text-decoration: none;
+}
+.user a:hover {
+  background: #EEE;
+}
+.user .name {
+  font-weight: 300;
+}
+.user .username {
+  background: #48F;
+  border-radius: 2rem;
+  color: #FFF;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+}
+.user .timeago {
+  color: #999;
+  font-style: italic;
+}
+.user img.avatar {
+  height: 10rem;
+  position: absolute;
+    left: 0;
+    top: 0;
+  width: 10rem;
 }
