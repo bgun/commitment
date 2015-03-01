@@ -7,16 +7,36 @@ var UserList = React.createClass({
     };
   },
   loadComments: function() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      success: function(data) {
-        this.setState({ data: data.users });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    var time = new Date().getTime();
+    // Avoid crushing GitHub rate limit (5000 per hour).
+    // The more users you're checking in on, the longer this should be.
+    var delay_seconds = 300;
+    var msg, cached_data, time_left;
+    cached_data = JSON.parse(localStorage.getItem('users'));
+    if(cached_data && (cached_data.updated+(delay_seconds*1000) > time)) {
+      time_left = Math.round(delay_seconds - ((time-cached_data.updated)/1000));
+      msg = "Showing recently cached data. " + time_left + " seconds till delay expires";
+      this.setState({
+        message: msg,
+        data: cached_data.users
+      });
+    } else {
+      console.log("No recently cached data found. Loading...");
+      $.ajax({
+        url: this.props.url,
+        dataType: 'json',
+        success: function(data) {
+          localStorage.setItem('users', JSON.stringify(data));
+          this.setState({
+            message: "Fetching new data",
+            data: data.users
+          });
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
+    }
   },
   componentDidMount: function() {
     this.loadComments();
@@ -30,6 +50,7 @@ var UserList = React.createClass({
     return (
       <ul className="user-list">
         {userNodes}
+        <p className="message">{this.state.message}</p>
       </ul>
     );
   }
@@ -42,7 +63,6 @@ var User = React.createClass({
     }
   },
   render: function() {
-    console.log(this.props);
     return (
       <li className="user">
         <a href={this.props.user.home_url}>
