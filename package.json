@@ -1,0 +1,25 @@
+{
+  "name": "commitment",
+  "version": "1.0.0",
+  "description": "API to track and analyze GitHub commits for a group of users",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bgun/commitment.git"
+  },
+  "author": "Ben Gundersen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bgun/commitment/issues"
+  },
+  "homepage": "https://github.com/bgun/commitment",
+  "dependencies": {
+    "express": "^4.12.0",
+    "lodash": "^3.3.1",
+    "q": "^1.2.0",
+    "request": "^2.53.0"
+  }
+}
