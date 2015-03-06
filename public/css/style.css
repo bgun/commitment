@@ -22,8 +22,10 @@ html, body {
   background-repeat: no-repeat;
 }
 h1 {
+  border-bottom: 1px dotted #DDD;
   font-size: 4rem;
   font-weight: 100;
+  padding-bottom: 2rem;
 }
 .user-list {
   list-style: none;
@@ -50,6 +52,7 @@ h1 {
 }
 .user .name {
   font-weight: 300;
+  margin-right: 1rem;
 }
 .user .username {
   background: #59F;
@@ -60,7 +63,6 @@ h1 {
   border-radius: 2rem;
   color: #FFF;
   font-size: 1.5rem;
-  margin-left: 1rem;
   padding: 0.5rem 1rem 0.5rem 3rem
 }
 .user .timeago {
@@ -74,6 +76,12 @@ h1 {
     left: 0;
     top: 0;
   width: 10rem;
+}
+
+.message {
+  color: #AAA;
+  font-size: 1.2rem;
+  font-style: italic;
 }
 
 footer {
