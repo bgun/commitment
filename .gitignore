@@ -1,5 +1,10 @@
 # Secret stuff
-config.js
+
+# node-dirty file-based DB.
+# If your list of users is too big for this
+# solution to handle, you've already outgrown
+# the scope of this project. :)
+dirty.db
 
 # Logs
 logs
