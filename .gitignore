@@ -5,7 +5,7 @@ run.txt
 # If your list of users is too big for this
 # solution to handle, you've already outgrown
 # the scope of this project. :)
-#dirty.db
+dirty.db
 
 # Logs
 logs

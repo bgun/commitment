@@ -18,7 +18,7 @@ html, body {
 }
 #container.loading {
   background-image: url('/public/images/loading.gif');
-  background-position: center;
+  background-position: center 6rem;
   background-repeat: no-repeat;
 }
 h1 {

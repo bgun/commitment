@@ -12,7 +12,7 @@ moment().tz("America/New_York").format();
 
 var port = process.env.PORT || 9005;
 var app  = express();
-var db   = dirty('dirty.db');
+var db   = dirty(__dirname + '/dirty.db');
 
 // pass through public directory
 app.use('/public', express.static(__dirname + "/public"));
