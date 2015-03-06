@@ -27,6 +27,10 @@ var tokens = {
   client_secret: process.env.GITHUB_CLIENT_SECRET
 };
 
+if(!(tokens.client_id && tokens.client_secret)) {
+  throw new Error("Must set GitHub client ID and secret.");
+}
+
 // super simple string formatter
 var formatString = function(str, tokens) {
   _.each(tokens, function(v, k) {
