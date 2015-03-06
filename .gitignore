@@ -1,4 +1,5 @@
 # Secret stuff
+run.txt
 
 # node-dirty file-based DB.
 # If your list of users is too big for this
