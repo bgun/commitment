@@ -193,7 +193,7 @@ app.get('/data', function(req, res) {
         updated       : updated,
         elapsed       : end - now,     // how long did the request take?
         cache_expires : cache_expires, // seconds to expire
-        used_cache    : expired,
+        used_cache    : !expired,
         users         : data
       });
     })
